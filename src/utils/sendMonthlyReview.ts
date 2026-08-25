@@ -2,7 +2,7 @@ export async function sendMonthlyReview(data: any): Promise<boolean> {
   try {
     const formData = new FormData();
 
-    // Replace with your Web3Forms Access Key
+    // Web3Forms Access Key
     formData.append(
       "access_key",
       "5f818451-df1b-43db-8385-4f10aa4f9266"
@@ -18,50 +18,72 @@ export async function sendMonthlyReview(data: any): Promise<boolean> {
       "DUOFIT Website"
     );
 
+    const valuablePart = [
+      ...(data.valuablePart || []),
+      data.valuablePartOther,
+    ]
+      .filter(Boolean)
+      .join(", ");
+
+    const improveArea =
+      data.improveArea === "Other"
+        ? data.improveAreaOther
+        : data.improveArea;
+
     formData.append(
       "message",
-`
+      `
 ==============================
 DUOFIT MONTHLY PROGRESS REVIEW
 ==============================
 
 1. Visible Changes
 
-${data.visibleChanges}
+Question:
+Looking back to when you started DUOFIT, what visible or noticeable changes have you seen in yourself so far?
 
+Answer:
+${data.visibleChanges || "-"}
 
 --------------------------------------------
 
 2. Most Valuable Part
 
-${data.valuablePart.join(", ")}
+Question:
+What has been the most valuable part of your DUOFIT experience so far?
 
-${data.valuablePartOther}
-
-
---------------------------------------------
-
-3. Doing Differently
-
-${data.doingDifferently}
-
+Answer:
+${valuablePart || "-"}
 
 --------------------------------------------
 
-4. Area to Improve
+3. New Healthy Habits
 
-${
-data.improveArea === "Other"
-? data.improveAreaOther
-: data.improveArea
-}
+Question:
+What is one thing you are doing differently now compared with when you started?
 
+Answer:
+${data.doingDifferently || "-"}
 
 --------------------------------------------
 
-5. Journey Message
+4. Future Focus
 
-${data.journeyMessage}
+Question:
+What is one area of your health or lifestyle you would most like to improve further?
+
+Answer:
+${improveArea || "-"}
+
+--------------------------------------------
+
+5. Your DUOFIT Journey
+
+Question:
+If you could describe your DUOFIT journey so far to someone who is where you were when you started, what would you tell them?
+
+Answer:
+${data.journeyMessage || "-"}
 
 --------------------------------------------
 
