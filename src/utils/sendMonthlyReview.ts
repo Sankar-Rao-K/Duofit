@@ -37,50 +37,35 @@ export async function sendMonthlyReview(data: any): Promise<boolean> {
 DUOFIT MONTHLY PROGRESS REVIEW
 ==============================
 
-1. Visible Changes
-
-Question:
-Looking back to when you started DUOFIT, what visible or noticeable changes have you seen in yourself so far?
+1. Looking back to when you started DUOFIT, what visible or noticeable changes have you seen in yourself so far?
 
 Answer:
 ${data.visibleChanges || "-"}
 
 --------------------------------------------
 
-2. Most Valuable Part
-
-Question:
-What has been the most valuable part of your DUOFIT experience so far?
+2. What has been the most valuable part of your DUOFIT experience so far?
 
 Answer:
 ${valuablePart || "-"}
 
 --------------------------------------------
 
-3. New Healthy Habits
-
-Question:
-What is one thing you are doing differently now compared with when you started?
+3. What is one thing you are doing differently now compared with when you started?
 
 Answer:
 ${data.doingDifferently || "-"}
 
 --------------------------------------------
 
-4. Future Focus
-
-Question:
-What is one area of your health or lifestyle you would most like to improve further?
+4. What is one area of your health or lifestyle you would most like to improve further?
 
 Answer:
 ${improveArea || "-"}
 
 --------------------------------------------
 
-5. Your DUOFIT Journey
-
-Question:
-If you could describe your DUOFIT journey so far to someone who is where you were when you started, what would you tell them?
+5. If you could describe your DUOFIT journey so far to someone who is where you were when you started, what would you tell them?
 
 Answer:
 ${data.journeyMessage || "-"}
