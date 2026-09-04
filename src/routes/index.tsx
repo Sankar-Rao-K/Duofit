@@ -1,121 +1,87 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
-  Users,
-  Clock,
-  Star,
-  UserRound,
-  ClipboardCheck,
-  Handshake,
-  ChartColumnIncreasing,
+  Dumbbell,
   Leaf,
-  CheckCircle2,
+  ShieldCheck,
+  Star,
   Quote,
+  CheckCircle2,
+  Calendar,
+  MessageCircle,
 } from "lucide-react";
+import { useState } from "react";
 import { SiteLayout } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
-import heroImg from "@/assets/hero-lifestyle-new.jpg";
-import personalHealth from "@/assets/personal-health.png";
-import heroMobileImg from "@/assets/hero-lifestyle-mobile.jpg";
-import { useState } from "react";
+import { WHATSAPP_NUMBER } from "@/components/site/WhatsAppFab";
 import { seo } from "@/lib/seo";
+import heroImg from "@/assets/founders.jpeg";
+import personalHealth from "@/assets/personal-health.png";
+import nutritionImg from "@/assets/hero-lifestyle-new.jpg";
 
 export const Route = createFileRoute("/")({
   head: () =>
     seo({
       title: "DUOFIT — Health, Designed to Last. | Nutrition & Fitness Coaching",
       description:
-        "Build a healthier life through practical nutrition, sustainable movement and everyday habits that fit real life. Health coaching for individuals, couples and families in Hyderabad.",
+        "Personalised fitness and nutrition coaching built around your goals, lifestyle and long-term health.",
       path: "/",
     }),
   component: Home,
 });
 
-// ── Hero stats ──────────────────────────────────────────────────────────
-const heroStats = [
-  { icon: Users, value: "20+", label: "Clients Guided" },
-  { icon: Clock, value: "150+", label: "Coaching Hours" },
-  { icon: Star, value: "4.9★", label: "Client Satisfaction" },
-];
-
-// ── Section 2 — 6 points, reusing the site's existing images ────────────
-const problemCards = [
-  {
-    text: "Trying to lose weight but struggling to stay consistent",
-    img: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=300&fit=crop&crop=center",
-  },
-  {
-    text: "Starting healthy routines and stopping after a few weeks",
-    img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop&crop=center",
-  },
-  {
-    text: "Poor sleep, low energy and feeling constantly tired",
-    img: "https://images.unsplash.com/photo-1531353826977-0941b4779a1c?w=400&h=300&fit=crop&crop=top",
-  },
-  {
-    text: "Busy work and family schedules leaving little time for yourself",
-    img: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=400&h=300&fit=crop&crop=center",
-  },
-  {
-    text: "Feeling confused by conflicting health and nutrition advice",
-    img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=300&fit=crop&crop=center",
-  },
-  {
-    text: "Knowing what to do but finding it hard to follow through consistently",
-    img: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=400&h=300&fit=crop&crop=center",
-  },
-];
-
-// ── Programs — mirrors the two programs on /programs ─────────────────────
-// ⚠️ Placeholder photos — swap for real DUOFIT program photography when
-// you have it. Slugs must match the anchor IDs added to programs.tsx.
+// ── Programs ──────────────────────────────────────────────────────────────
 const programs = [
   {
-    slug: "personal-health-coaching",
-    title: "Personal Health Coaching",
-    desc: "A holistic approach to nutrition, fitness, sleep and lifestyle — built around your goals, not a generic plan.",
-    img: personalHealth
+     slug: "personal-health-coaching",
+    icon: Dumbbell,
+   img: personalHealth,
+
+   title: "Personal Health Coaching",
+
+  desc: "A holistic approach to nutrition, fitness, sleep and lifestyle — built around your goals, not a generic plan.",
+
   },
   {
-    slug: "family-health-habits",
-    title: "Family Health & Habits",
-    desc: "Helping families build healthier routines together through practical nutrition, movement and everyday habits.",
+   slug: "family-health-habits",
+
+    icon: Leaf,
     img: "https://i.pinimg.com/originals/3e/d3/38/3ed33865182657c8cb456c0862ae2386.jpg",
+
+   title: "Family Health & Habits",
+    desc: "Helping families build healthier routines together through practical nutrition, movement and everyday habits.",
+
   },
 ];
 
-const whyDuofitWorks = [
+// ── Why DUOFIT checklist ────────────────────────────────────────────────
+const whyChecklist = [
+  "Personalised Plans",
+  "Evidence-Informed",
+  "Sustainable Results",
+  "Coach Support",
+  "Real Accountability",
+];
+
+// ── Testimonials ────────────────────────────────────────────────────────
+// ⚠️ These are placeholder testimonials matching the reference layout —
+// swap in real client quotes before publishing.
+const testimonials = [
   {
-    icon: UserRound,
-    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=face",
-    title: "Understand",
-    desc: "We begin by understanding your lifestyle, health history, daily routine and personal goals.",
+    quote: "DUOFIT helped me build a routine that fits my work schedule. I feel stronger, more energetic and more confident than ever.",
+    name: "Arjun R.",
   },
   {
-    icon: ClipboardCheck,
-    img: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=200&h=200&fit=crop&crop=center",
-    title: "Personalize",
-    desc: "Every recommendation is tailored to your lifestyle, food preferences and schedule.",
+    quote: "The nutrition guidance was practical and easy to follow. It's not just about looking better, it's about feeling better.",
+    name: "Neha P.",
   },
   {
-    icon: Handshake,
-    img: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=center",
-    title: "Coach",
-    desc: "Regular guidance, accountability and encouragement help you stay consistent.",
-  },
-  {
-    icon: ChartColumnIncreasing,
-    img: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=200&h=200&fit=crop&crop=center",
-    title: "Measure",
-    desc: "We measure progress through healthier habits, energy levels and sustainable improvements.",
-  },
-  {
-    icon: Leaf,
-    img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=200&h=200&fit=crop&crop=center",
-    title: "Sustain",
-    desc: "The goal isn't another short-term program. It's creating healthy habits that last.",
+    quote: "I've trained before, but never saw consistent results. The structured approach at DUOFIT changed that.",
+    name: "Karan S.",
   },
 ];
+
+// ── Existing interactive Venn diagram — unchanged from current site ─────
 function VennDiagram() {
   const [active, setActive] = useState<number | null>(null);
 
@@ -219,466 +185,256 @@ function VennDiagram() {
   );
 }
 
+const shimmerBtn =
+  "group relative inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-sm font-semibold uppercase tracking-widest rounded-full min-h-[44px] overflow-hidden transition-all duration-300 hover:brightness-110 hover:scale-105 hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)] active:scale-95";
+const shimmerSpan =
+  "absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 pointer-events-none";
+
 function Home() {
+  const waUrl = `https://wa.me/${WHATSAPP_NUMBER.replace(/[^0-9]/g, "")}`;
+
   return (
     <SiteLayout>
 
-      {/* HERO — unchanged background/photo, now with 3 stat boxes added */}
-      <section className="relative w-full h-[100dvh] md:h-[85vh] lg:h-[90vh] overflow-hidden bg-foreground text-background">
-        <picture className="absolute inset-0 block w-full h-full">
-          <source media="(max-width: 767px)" srcSet={heroMobileImg} />
-          <source media="(min-width: 768px)" srcSet={heroImg} />
-          <img
-            src={heroMobileImg}
-            alt="Better Health That Lasts"
-            className="w-full h-full object-cover object-[50%_15%] md:object-[70%_25%]"
-          />
-        </picture>
-
-        <div
-          className="absolute inset-0 md:hidden pointer-events-none"
-          style={{ background: "linear-gradient(90deg, oklch(0.12 0.04 145 / 0.80) 0%, oklch(0.12 0.04 145 / 0.40) 40%, transparent 72%)" }}
-        />
-        <div className="absolute inset-0 hidden md:block pointer-events-none"
-          style={{ background: "linear-gradient(180deg, oklch(0.18 0.04 145 / 0.18) 0%, oklch(0.18 0.04 145 / 0.45) 100%)" }}
-        />
-        <div className="absolute inset-0 hidden md:block pointer-events-none"
-          style={{ background: "linear-gradient(90deg, oklch(0.12 0.04 145 / 0.82) 0%, oklch(0.14 0.04 145 / 0.60) 30%, oklch(0.14 0.04 145 / 0.18) 55%, transparent 72%)" }}
-        />
-
-        <div className="absolute inset-0 z-10 flex items-start pt-14 md:pt-16 lg:pt-20">
-          <div className="container-editorial w-full">
-            <div className="max-w-[70%] sm:max-w-[60%] md:max-w-[420px] lg:max-w-[480px] text-left">
-              <Reveal>
-                <h1
-                  className="font-display leading-[1.05] drop-shadow-[0_2px_18px_rgba(0,0,0,0.9)]"
-                  style={{ color: "#f5f0e8", fontSize: "clamp(2.4rem, 7vw, 5.25rem)", fontWeight: 700 }}
-                >
-                  <span className="block">Health,</span>
-                  <span className="block italic">Designed to Last.</span>
-                </h1>
-              </Reveal>
-              <Reveal delay={200}>
-                <p className="mt-4 md:mt-6 text-sm md:text-lg leading-[1.6] md:leading-[1.8] drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]" style={{ color: "#ffffff" }}>
-                  Build a healthier life through practical{" "}
-                  <span className="font-semibold underline decoration-primary/60 underline-offset-2">nutrition</span>,{" "}
-                  <span className="font-semibold underline decoration-primary/60 underline-offset-2">sustainable movement</span> and{" "}
-                  <span className="font-semibold underline decoration-primary/60 underline-offset-2">everyday habits</span>{" "}
-                  that fit real life.
-                </p>
-              </Reveal>
-
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 2 — Does This Sound Like You (restructured) */}
-      <section className="bg-cream border-y border-border">
-        <div className="container-editorial py-16 md:py-24 lg:py-32">
-
-          <Reveal>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-center max-w-2xl mx-auto">
-              Does this sound like you?
-            </h2>
-          </Reveal>
-
-          {/* 6 points, 3 left / 3 right, each with its image */}
-          <div className="mt-12 md:mt-16 grid sm:grid-cols-2 gap-x-12 gap-y-8 max-w-4xl mx-auto">
-            {problemCards.map((card, i) => (
-              <Reveal key={i} delay={i * 70}>
-                <div className="flex items-center gap-4">
-                  <div className="shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden">
-                    <img
-                      src={card.img}
-                      alt={card.text}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <p className="text-sm text-muted-foreground leading-snug">
-                    {card.text}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* Centered callout box */}
-          <Reveal delay={400}>
-            <div className="mt-12 md:mt-16 max-w-2xl mx-auto rounded-2xl border border-primary/20 bg-primary/5 px-6 py-6 md:px-8 md:py-7 text-center">
-              <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                Most people don't struggle because they lack motivation. They
-                struggle because healthy eating, exercise and routines often
-                feel difficult to maintain alongside work, family
-                responsibilities and everyday life.
+      {/* HERO */}
+      <section className="container-editorial pt-10 md:pt-16 pb-14 md:pb-20">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div>
+            <Reveal>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight text-foreground">
+                Health,<br />
+                <span className="italic text-primary">Designed</span> to Last.
+              </h1>
+            </Reveal>
+            <Reveal delay={100}>
+              <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed max-w-md">
+                Personalised fitness and nutrition coaching built around your
+                goals, lifestyle and long-term health.
               </p>
-              <p className="mt-3 text-sm md:text-base font-semibold text-foreground leading-relaxed">
-                Real health isn't about doing more. It's about building
-                routines you can continue for life.
-              </p>
-            </div>
-          </Reveal>
-
-        </div>
-      </section>
-
-      {/* WHY DUOFIT WORKS */}
-
-      <section className="bg-background border-y border-border">
-        <div className="container-editorial py-16 md:py-24 lg:py-32">
-
-          <Reveal>
-            <span className="text-xs font-bold uppercase tracking-[0.28em] text-primary block text-center mb-3">
-              Why DUOFIT Works
-            </span>
-          </Reveal>
-
-          <Reveal delay={80}>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-center max-w-3xl mx-auto">
-              A simple approach.
-              <br />
-              A lasting difference.
-            </h2>
-          </Reveal>
-
-          <Reveal delay={150}>
-            <p className="mt-5 text-center text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              At DUOFIT, we don't believe in temporary diets or extreme fitness
-              plans. We build practical systems that fit your real life so healthy
-              habits become sustainable.
-            </p>
-          </Reveal>
-
-          {/* Desktop */}
-
-          <div className="hidden lg:grid grid-cols-[1fr_330px] gap-12 mt-20 items-start">
-
-            <div>
-
-              <div className="relative">
-
-                <div className="absolute left-0 right-0 top-10 h-[2px] bg-border" />
-
-                <div className="grid grid-cols-5 relative">
-
-                  {whyDuofitWorks.map((step, i) => {
-
-                    const Icon = step.icon;
-
-                    return (
-
-                      <Reveal key={step.title} delay={i * 80}>
-
-                        <div className="text-center px-3">
-
-                          <div className="mx-auto w-20 h-20 rounded-full overflow-hidden border-2 border-primary/30 shadow-md relative z-10">
-                            <img src={step.img} alt={step.title} className="w-full h-full object-cover" />
-                          </div>
-
-                          <h3 className="mt-5 font-bold text-lg">
-
-                            {step.title}
-
-                          </h3>
-
-                          <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-
-                            {step.desc}
-
-                          </p>
-
-                        </div>
-
-                      </Reveal>
-
-                    );
-
-                  })}
-
-                </div>
-
-              </div>
-
-              <Reveal delay={450}>
-                <div className="mt-14 rounded-2xl border border-primary/20 bg-primary/5 p-8 text-center">
-
-                  <p className="text-lg text-muted-foreground">
-
-                    Weight loss may be one outcome.
-
-                  </p>
-
-                  <p className="mt-3 text-2xl font-bold text-primary">
-
-                    Lasting health is always the goal.
-
-                  </p>
-
-                </div>
-              </Reveal>
-
-            </div>
-
-            {/* Quote Card */}
-
-            <Reveal delay={250}>
-
-              <div className="rounded-3xl border border-border bg-card p-8 sticky top-28">
-
-                <Quote className="w-10 h-10 text-primary/30 mb-4" />
-
-                <h3 className="text-3xl font-bold leading-tight">
-
-                  If it can't last,
-
-                  <br />
-
-                  it isn't DUOFIT.
-
-                </h3>
-
-                <div className="mt-8 space-y-4">
-
-                  {[
-                    "Progress over perfection",
-                    "Consistency over intensity",
-                    "Habits over hacks",
-                    "Long-term health over short-term results",
-                  ].map((item) => (
-
-                    <div key={item} className="flex gap-3">
-
-                      <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-
-                      <span className="text-sm text-muted-foreground">
-
-                        {item}
-
-                      </span>
-
-                    </div>
-
-                  ))}
-
-                </div>
-
-              </div>
-
             </Reveal>
-
-          </div>
-
-          {/* Mobile */}
-
-          <div className="lg:hidden mt-16">
-
-            <div className="relative ml-5 border-l-2 border-border">
-
-              {whyDuofitWorks.map((step, i) => {
-
-                const Icon = step.icon;
-
-                return (
-
-                  <Reveal key={step.title} delay={i * 70}>
-
-                    <div className="relative pl-12 pb-12">
-
-                      <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/30 shadow-sm relative mb-3">
-                        <img src={step.img} alt={step.title} className="w-full h-full object-cover" />
-                        <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-primary flex items-center justify-center border-2 border-background">
-                          <Icon className="w-3 h-3 text-primary-foreground" />
-                        </div>
-                      </div>
-
-                      <h3 className="font-bold text-xl">
-
-                        {step.title}
-
-                      </h3>
-
-                      <p className="mt-2 text-muted-foreground leading-relaxed">
-
-                        {step.desc}
-
-                      </p>
-
-                    </div>
-
-                  </Reveal>
-
-                );
-
-              })}
-
-            </div>
-
-            <Reveal delay={450}>
-              <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 text-center">
-
-                <p className="text-muted-foreground">
-
-                  Weight loss may be one outcome.
-
-                </p>
-
-                <p className="mt-2 text-xl font-bold text-primary">
-
-                  Lasting health is always the goal.
-
-                </p>
-
-              </div>
-            </Reveal>
-
-            <Reveal delay={500}>
-              <div className="mt-8 rounded-3xl border border-border bg-card p-6">
-
-                <h3 className="text-2xl font-bold">
-
-                  If it can't last,
-
-                  <br />
-
-                  it isn't DUOFIT.
-
-                </h3>
-
-                <div className="mt-6 space-y-4">
-
-                  {[
-                    "Progress over perfection",
-                    "Consistency over intensity",
-                    "Habits over hacks",
-                    "Long-term health over short-term results",
-                  ].map((item) => (
-
-                    <div key={item} className="flex gap-3">
-
-                      <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-
-                      <span className="text-sm text-muted-foreground">
-
-                        {item}
-
-                      </span>
-
-                    </div>
-
-                  ))}
-
-                </div>
-
-              </div>
-            </Reveal>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* SECTION 4 — Programs */}
-      <section className="bg-cream border-t border-border">
-        <div className="container-editorial py-16 md:py-24 lg:py-32">
-          <Reveal>
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary block text-center mb-3">
-              Our Programs
-            </span>
-          </Reveal>
-          <Reveal delay={60}>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center max-w-xl mx-auto leading-tight">
-              Coaching designed around your journey.
-            </h2>
-          </Reveal>
-
-          <div className="mt-12 md:mt-16 grid sm:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
-            {programs.map((p, i) => (
-              <Reveal key={p.slug} delay={100 + i * 120}>
-                <Link
-                  to="/programs"
-                  hash={p.slug}
-                  className="group block bg-card border border-border rounded-2xl overflow-hidden h-full flex flex-col transition-all duration-500 hover:-translate-y-2 hover:border-primary/40 hover:shadow-[0_20px_45px_rgba(0,0,0,0.12)]"
-                >
-                  <div className="aspect-[4/3] bg-muted overflow-hidden relative">
-                    <img
-                      src={p.img}
-                      alt={p.title}
-                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  </div>
-                  <div className="p-6 flex flex-col flex-1">
-                    <h3 className="text-lg font-bold text-foreground mb-2 transition-colors duration-300 group-hover:text-primary">
-                      {p.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">
-                      {p.desc}
-                    </p>
-                    <span className="inline-flex items-center gap-2 border border-primary text-primary px-5 py-2.5 text-xs font-semibold uppercase tracking-widest rounded-full transition-all duration-300 self-start group-hover:bg-primary group-hover:text-primary-foreground group-hover:gap-3 group-hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)]">
-                      Explore
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                    </span>
-                  </div>
+            <Reveal delay={180}>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Link to="/contact" className={shimmerBtn} style={{ backgroundColor: "var(--color-primary)", color: "#ffffff" }}>
+                  <span className={shimmerSpan} />
+                  Start Your Journey <ArrowRight className="h-4 w-4" />
                 </Link>
+                <Link to="/about" className={`${shimmerBtn} border border-border text-foreground`}>
+                  Our Approach <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </Reveal>
+            <Reveal delay={260}>
+              <div className="mt-8 flex items-center gap-6">
+                <div className="flex items-center gap-3">
+                  <div className="flex -space-x-2.5">
+                    {[personalHealth, nutritionImg, heroImg, personalHealth].map((img, i) => (
+                      <img key={i} src={img} alt="" className="h-8 w-8 rounded-full border-2 border-background object-cover" />
+                    ))}
+                  </div>
+                  <div className="text-xs leading-tight">
+                    <span className="block font-bold text-foreground">500+</span>
+                    <span className="block text-muted-foreground">People Transformed</span>
+                  </div>
+                </div>
+                <div className="h-8 w-px bg-border" />
+                <div className="text-xs leading-tight">
+                  <div className="flex items-center gap-1">
+                    <span className="font-bold text-foreground">4.9/5</span>
+                    <div className="flex gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-3 w-3 fill-primary text-primary" />
+                      ))}
+                    </div>
+                  </div>
+                  <span className="block text-muted-foreground mt-0.5">From 150+ Reviews</span>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={140}>
+            <div className="relative">
+              <div className="absolute inset-0 rounded-full bg-muted/60 scale-90 -z-10" />
+              <div className="overflow-hidden rounded-3xl aspect-[4/3] bg-muted">
+                <img src={heroImg} alt="DUOFIT coaches" className="h-full w-full object-cover" loading="eager" />
+              </div>
+              <div className="absolute -bottom-5 left-5 bg-card border border-border rounded-2xl px-4 py-3 shadow-lg flex items-center gap-2.5">
+                <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                  <ShieldCheck className="h-4 w-4 text-primary" />
+                </div>
+                <span className="text-sm font-semibold text-foreground">Certified Experts</span>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* PROGRAMS */}
+      <section className="bg-cream border-y border-border">
+        <div className="container-editorial py-16 md:py-24">
+          <div className="flex items-end justify-between mb-9 flex-wrap gap-3">
+            <div>
+              <Reveal>
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">Coaching Programs</span>
               </Reveal>
-            ))}
+              <Reveal delay={60}>
+                <h2 className="mt-2 text-3xl md:text-4xl font-bold text-foreground leading-tight">
+                  Programs Designed<br />For Real Life.
+                </h2>
+              </Reveal>
+            </div>
+            <Reveal delay={100}>
+              <Link to="/programs" className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground hover:text-primary transition-colors">
+                View All Programs <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </Reveal>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {programs.map((p, i) => {
+              const Icon = p.icon;
+              return (
+                <Reveal key={p.slug} delay={100 + i * 100}>
+                  <Link
+                    to="/programs"
+                    hash={p.slug}
+                    className="group flex bg-card border border-border rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)]"
+                  >
+                    <div className="relative w-2/5 shrink-0 overflow-hidden">
+                      <img src={p.img} alt={p.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <div className="absolute top-3 left-3 h-9 w-9 rounded-full bg-primary flex items-center justify-center shadow-md">
+                        <Icon className="h-4 w-4 text-primary-foreground" />
+                      </div>
+                    </div>
+                    <div className="flex-1 p-5 flex flex-col justify-center">
+                      <h3 className="text-lg font-bold text-foreground mb-1.5 transition-colors group-hover:text-primary">{p.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
+                      <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-foreground group-hover:gap-2.5 transition-all">
+                        Learn More <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
+                    </div>
+                  </Link>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
 
-
-
-      {/* SECTION 3 — Health is Connected (unchanged) */}
-      <section className="container-editorial py-16 md:py-24 lg:py-32">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      {/* WHY DUOFIT — Venn diagram (existing interactive component, per instruction) */}
+      <section className="container-editorial py-16 md:py-24">
+        <div className="grid lg:grid-cols-[1fr_1.15fr_0.7fr] gap-10 lg:gap-8 items-center">
 
           <div>
             <Reveal>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
-                Health is more connected than most people realize.
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">Why DUOFIT?</span>
+            </Reveal>
+            <Reveal delay={60}>
+              <h2 className="mt-3 text-3xl md:text-4xl font-bold text-foreground leading-tight">
+                More Than<br />Workouts.
               </h2>
             </Reveal>
-
-            <Reveal delay={200}>
-              <div className="mt-8 p-5 rounded-2xl border border-primary/20 bg-primary/5">
-                <p className="text-sm font-semibold text-foreground leading-relaxed">
-                  At DUOFIT, we take a more holistic approach to health.
-                </p>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                  Instead of focusing on one challenge in isolation, we look at your lifestyle as a whole, understand the root causes and create practical strategies that fit your goals, routines and everyday life.
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={280}>
-              <p className="mt-6 text-sm text-muted-foreground italic">
-                Every health journey is different. That's why DUOFIT focuses on understanding the whole picture before recommending a path forward.
+            <Reveal delay={110}>
+              <p className="mt-2 text-lg md:text-xl italic text-primary leading-snug">
+                A Complete System<br />For Your Health.
               </p>
             </Reveal>
-            <Reveal delay={120}>
-              <div className="mt-10 flex justify-center">
-                <Link
-                  to="/contact"
-                  className="group relative inline-flex items-center gap-3 px-8 py-4 text-sm font-semibold uppercase tracking-widest rounded-full min-h-[48px] overflow-hidden transition-all duration-300 hover:brightness-110 hover:scale-105 hover:shadow-[0_10px_30px_rgba(0,0,0,0.18)] active:scale-95"
-                  style={{
-                    backgroundColor: "var(--color-primary)",
-                    color: "#ffffff",
-                  }}
-                >
-                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 pointer-events-none" />
-
-                  Start your health journey
-
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            <Reveal delay={160}>
+              <p className="mt-5 text-sm md:text-base text-muted-foreground leading-relaxed">
+                At DUOFIT, we focus on the pillars that truly build lasting
+                health — and combine them in a way that works for real life.
+              </p>
+            </Reveal>
+            <Reveal delay={220}>
+              <div className="mt-7">
+                <Link to="/about" className={shimmerBtn} style={{ backgroundColor: "var(--color-primary)", color: "#ffffff" }}>
+                  <span className={shimmerSpan} />
+                  Our Approach <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             </Reveal>
           </div>
 
-          <Reveal delay={100}>
+          <Reveal delay={140}>
             <VennDiagram />
           </Reveal>
 
+          <Reveal delay={200}>
+            <div className="space-y-3.5">
+              {whyChecklist.map((item) => (
+                <div key={item} className="flex items-center gap-2.5">
+                  <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
+                  <span className="text-sm text-foreground">{item}</span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
         </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="bg-cream border-y border-border">
+        <div className="container-editorial py-16 md:py-24">
+          <div className="flex items-end justify-between mb-9 flex-wrap gap-3">
+            <div>
+              <Reveal>
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">Real People. Real Results.</span>
+              </Reveal>
+              <Reveal delay={60}>
+                <h2 className="mt-2 text-3xl md:text-4xl font-bold text-foreground leading-tight">What Our Clients Say.</h2>
+              </Reveal>
+            </div>
+            <Reveal delay={100}>
+              <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground">
+                See More Reviews <ArrowRight className="h-3.5 w-3.5" />
+              </span>
+            </Reveal>
+          </div>
+
+          <div className="grid sm:grid-cols-3 gap-5">
+            {testimonials.map((t, i) => (
+              <Reveal key={t.name} delay={100 + i * 80}>
+                <div className="bg-card border border-border rounded-2xl p-6 h-full flex flex-col">
+                  <Quote className="h-5 w-5 text-primary/40 mb-2" />
+                  <div className="flex gap-0.5 mb-3">
+                    {[...Array(5)].map((_, s) => (
+                      <Star key={s} className="h-3.5 w-3.5 fill-primary text-primary" />
+                    ))}
+                  </div>
+                  <p className="text-sm text-foreground leading-relaxed mb-4 flex-1">"{t.quote}"</p>
+                  <span className="text-xs font-semibold text-muted-foreground">{t.name}</span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <section className="container-editorial py-16 md:py-20">
+        <Reveal>
+          <div className="rounded-3xl bg-primary text-primary-foreground p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="h-12 w-12 rounded-full bg-primary-foreground/15 flex items-center justify-center shrink-0">
+                <Calendar className="h-5 w-5" />
+              </div>
+              <div>
+                <span className="text-xs font-bold uppercase tracking-widest text-primary-foreground/70">Ready to Begin?</span>
+                <h3 className="text-xl md:text-2xl font-bold mt-1">Your Health Journey Starts Now.</h3>
+                <p className="text-sm text-primary-foreground/80 mt-1">Let's build a stronger, healthier and happier you.</p>
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+              <Link to="/contact" className="inline-flex items-center justify-center gap-2 bg-primary-foreground text-primary px-6 py-3.5 text-sm font-semibold rounded-full hover:brightness-95 active:scale-95 transition-all">
+                Start Your Journey <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a href={waUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary-foreground/85 hover:text-primary-foreground transition-colors">
+                or WhatsApp Us <MessageCircle className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </Reveal>
       </section>
 
     </SiteLayout>
