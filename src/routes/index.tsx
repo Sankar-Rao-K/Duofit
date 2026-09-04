@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ChevronDown} from "lucide-react";
 import {
   ArrowRight,
   Dumbbell,
@@ -190,6 +191,148 @@ const shimmerBtn =
 const shimmerSpan =
   "absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 pointer-events-none";
 
+// ── Section 2 data — matches your live "Does This Sound Like You" content ──
+const soundLikeYou = [
+  { text: "Trying to lose weight but struggling to stay consistent", img: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=200&h=200&fit=crop&crop=center" },
+  { text: "Poor sleep, low energy and feeling constantly tired", img: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=200&h=200&fit=crop&crop=center" },
+  { text: "Feeling confused by conflicting health and nutrition advice", img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=200&h=200&fit=crop&crop=center" },
+  { text: "Starting healthy routines and stopping after a few weeks", img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=200&h=200&fit=crop&crop=center" },
+  { text: "Busy work and family schedules leaving little time for yourself", img: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=200&h=200&fit=crop&crop=center" },
+  { text: "Knowing what to do but finding it hard to follow through consistently", img: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=center" },
+];
+
+// ── Section 3 — Programs, expanded with benefit bullets ──
+// ⚠️ Draft copy — swap in your exact programs.tsx bullets if these differ.
+const programsExpanded = [
+  {
+    slug: "fitness-coaching",
+    icon: Dumbbell,
+    img: personalHealth,
+    title: "Fitness Coaching",
+    desc: "Personalised training plans to build strength, improve fitness & performance.",
+    benefits: [
+      "Build strength and improve overall fitness",
+      "Structured, progressive training — not random workouts",
+      "Realistic routines that fit your schedule",
+    ],
+  },
+  {
+    slug: "nutrition-coaching",
+    icon: Leaf,
+    img: nutritionImg,
+    title: "Nutrition Coaching",
+    desc: "Practical nutrition strategies that fit your lifestyle and food preferences.",
+    benefits: [
+      "Practical food choices, not restrictive diets",
+      "Meal guidance that fits your lifestyle and preferences",
+      "Build sustainable eating habits that last",
+    ],
+  },
+];
+
+// ── Section 4 — 5-step process timeline (replaces Venn diagram entirely) ──
+const processSteps = [
+  { n: "01", title: "Understand", desc: "We begin by understanding your lifestyle, health history, daily routine and personal goals.", img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&h=200&fit=crop&crop=faces" },
+  { n: "02", title: "Personalize", desc: "Every recommendation is tailored to your lifestyle, food preferences and schedule.", img: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=200&h=200&fit=crop&crop=center" },
+  { n: "03", title: "Coach", desc: "Regular guidance, accountability and encouragement help you stay consistent.", img: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=200&h=200&fit=crop&crop=center" },
+  { n: "04", title: "Measure", desc: "We measure progress through healthier habits, energy levels and sustainable improvements.", img: "https://images.unsplash.com/photo-1551651056-2ec0d3ba1e0b?w=200&h=200&fit=crop&crop=center" },
+  { n: "05", title: "Sustain", desc: "The goal isn't another short-term program. It's creating healthy habits that last.", img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=200&h=200&fit=crop&crop=center" },
+];
+
+function ProcessTimeline() {
+  return (
+    <div className="relative">
+      {/* Desktop — staggered with dashed wavy connector */}
+      <div className="hidden md:block relative">
+        <svg viewBox="0 0 1000 100" className="absolute inset-x-0 top-[52px] w-full h-[80px] pointer-events-none z-0" preserveAspectRatio="none">
+          <path
+            d="M 60 20 Q 190 -15, 310 55 T 560 55 T 810 20 T 940 55"
+            fill="none" stroke="var(--color-border)" strokeWidth="1.5" strokeDasharray="5 5"
+          />
+        </svg>
+        <div className="grid grid-cols-5 gap-4 relative z-10">
+          {processSteps.map((s, i) => (
+            <Reveal key={s.n} delay={i * 100}>
+              <div className={`flex flex-col items-center text-center ${i % 2 === 1 ? "mt-16" : ""}`}>
+                <div className="relative">
+                  <div className="h-16 w-16 rounded-full overflow-hidden border-2 border-border shadow-sm">
+                    <img src={s.img} alt={s.title} className="h-full w-full object-cover" />
+                  </div>
+                  <span className="absolute -top-1.5 -right-1.5 h-6 w-6 rounded-full bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center shadow-sm">
+                    {s.n}
+                  </span>
+                </div>
+                <h4 className="mt-4 text-base font-bold text-primary italic">{s.title}</h4>
+                <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed max-w-[170px]">{s.desc}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile — vertical stack */}
+      <div className="md:hidden flex flex-col gap-7">
+        {processSteps.map((s, i) => (
+          <Reveal key={s.n} delay={i * 80}>
+            <div className="flex gap-4 items-start">
+              <div className="relative shrink-0">
+                <div className="h-14 w-14 rounded-full overflow-hidden border-2 border-border shadow-sm">
+                  <img src={s.img} alt={s.title} className="h-full w-full object-cover" />
+                </div>
+                <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-[9px] font-bold flex items-center justify-center shadow-sm">
+                  {s.n}
+                </span>
+              </div>
+              <div>
+                <h4 className="text-base font-bold text-primary italic">{s.title}</h4>
+                <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Section 6 — FAQ accordion ──
+// ⚠️ Draft copy in DUOFIT's established voice — edit freely.
+const faqs = [
+  { q: "How is DUOFIT different from a typical diet plan?", a: "We don't believe in extreme diets or unrealistic routines. Every plan is built around your actual lifestyle, food preferences and schedule — designed to be sustainable, not just short-term." },
+  { q: "Do I need to already be fit to start?", a: "Not at all. Whether you're just starting out or restarting after a break, coaching is personalised to your current fitness level and builds from there." },
+  { q: "What does a typical week of coaching look like?", a: "You'll get a personalised plan, regular check-ins with your coach, and ongoing adjustments based on how you're progressing — not a one-size-fits-all program." },
+  { q: "Is this only for individuals, or can families join too?", a: "DUOFIT supports individuals, couples and families — with coaching designed around real, shared routines." },
+  { q: "How soon will I see results?", a: "Every journey is different, but most clients notice improvements in energy, consistency and habits within the first few weeks — with lasting changes building over months." },
+  { q: "How do I get started?", a: "Just book a free consultation. We'll understand your goals and current lifestyle, then build a plan around it — no pressure, no obligation." },
+];
+
+function FaqAccordion() {
+  const [open, setOpen] = useState<number | null>(0);
+  return (
+    <div className="max-w-2xl mx-auto divide-y divide-border border-t border-b border-border">
+      {faqs.map((item, i) => {
+        const isOpen = open === i;
+        return (
+          <div key={item.q}>
+            <button
+              onClick={() => setOpen(isOpen ? null : i)}
+              className="w-full flex items-center justify-between gap-4 py-5 text-left"
+            >
+              <span className="text-sm md:text-base font-semibold text-foreground">{item.q}</span>
+              <ChevronDown className={`h-4 w-4 text-primary shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+            </button>
+            <div className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100 pb-5" : "grid-rows-[0fr] opacity-0"}`}>
+              <div className="overflow-hidden">
+                <p className="text-sm text-muted-foreground leading-relaxed pr-8">{item.a}</p>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function Home() {
   const waUrl = `https://wa.me/${WHATSAPP_NUMBER.replace(/[^0-9]/g, "")}`;
 
@@ -269,7 +412,156 @@ function Home() {
         </div>
       </section>
 
-      {/* PROGRAMS */}
+      {/* SECTION 2 — Does This Sound Like You */}
+      <section className="bg-cream border-y border-border">
+        <div className="container-editorial py-16 md:py-24">
+          <Reveal>
+            <h2 className="text-3xl md:text-5xl font-bold text-primary text-center italic mb-14 md:mb-16">
+              Does this sound like you?
+            </h2>
+          </Reveal>
+          <div className="grid sm:grid-cols-2 gap-x-16 gap-y-9 max-w-4xl mx-auto">
+            {soundLikeYou.map((item, i) => (
+              <Reveal key={item.text} delay={i * 70}>
+                <div className="flex items-center gap-4">
+                  <div className="shrink-0 w-16 h-16 rounded-lg overflow-hidden">
+                    <img src={item.img} alt={item.text} className="w-full h-full object-cover" />
+                  </div>
+                  <p className="text-sm text-foreground leading-snug">{item.text}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3 — Programs (expanded with benefits) */}
+      <section className="container-editorial py-16 md:py-24">
+        <div className="flex items-end justify-between mb-9 flex-wrap gap-3">
+          <div>
+            <Reveal>
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">Coaching Programs</span>
+            </Reveal>
+            <Reveal delay={60}>
+              <h2 className="mt-2 text-3xl md:text-4xl font-bold text-foreground leading-tight">
+                Programs Designed<br />For Real Life.
+              </h2>
+            </Reveal>
+          </div>
+          <Reveal delay={100}>
+            <Link to="/programs" className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground hover:text-primary transition-colors">
+              View All Programs <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </Reveal>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {programsExpanded.map((p, i) => {
+            const Icon = p.icon;
+            return (
+              <Reveal key={p.slug} delay={100 + i * 100}>
+                <div className="group bg-card border border-border rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_16px_36px_rgba(0,0,0,0.1)]">
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    <img src={p.img} alt={p.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <div className="absolute top-3 left-3 h-9 w-9 rounded-full bg-primary flex items-center justify-center shadow-md">
+                      <Icon className="h-4 w-4 text-primary-foreground" />
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-foreground mb-1.5">{p.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{p.desc}</p>
+                    <div className="space-y-2 mb-5">
+                      {p.benefits.map((b) => (
+                        <div key={b} className="flex items-start gap-2">
+                          <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
+                          <span className="text-xs text-muted-foreground leading-relaxed">{b}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <Link
+                      to="/programs"
+                      hash={p.slug}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-foreground hover:gap-2.5 hover:text-primary transition-all"
+                    >
+                      Learn More <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* SECTION 4 — Why & How DUOFIT Can Help (process timeline, no Venn) */}
+      <section className="bg-cream border-y border-border">
+        <div className="container-editorial py-16 md:py-24">
+          <Reveal>
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary block text-center mb-3">Our Approach</span>
+          </Reveal>
+          <Reveal delay={60}>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center max-w-lg mx-auto leading-tight mb-14 md:mb-20">
+              Why & How DUOFIT Can Help.
+            </h2>
+          </Reveal>
+          <ProcessTimeline />
+        </div>
+      </section>
+
+      {/* SECTION 5 — Testimonials (unchanged from before) */}
+      <section className="container-editorial py-16 md:py-24">
+        <div className="flex items-end justify-between mb-9 flex-wrap gap-3">
+          <div>
+            <Reveal>
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">Real People. Real Results.</span>
+            </Reveal>
+            <Reveal delay={60}>
+              <h2 className="mt-2 text-3xl md:text-4xl font-bold text-foreground leading-tight">What Our Clients Say.</h2>
+            </Reveal>
+          </div>
+          <Reveal delay={100}>
+            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground">
+              See More Reviews <ArrowRight className="h-3.5 w-3.5" />
+            </span>
+          </Reveal>
+        </div>
+        <div className="grid sm:grid-cols-3 gap-5">
+          {testimonials.map((t, i) => (
+            <Reveal key={t.name} delay={100 + i * 80}>
+              <div className="bg-card border border-border rounded-2xl p-6 h-full flex flex-col">
+                <Quote className="h-5 w-5 text-primary/40 mb-2" />
+                <div className="flex gap-0.5 mb-3">
+                  {[...Array(5)].map((_, s) => (
+                    <Star key={s} className="h-3.5 w-3.5 fill-primary text-primary" />
+                  ))}
+                </div>
+                <p className="text-sm text-foreground leading-relaxed mb-4 flex-1">"{t.quote}"</p>
+                <span className="text-xs font-semibold text-muted-foreground">{t.name}</span>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 6 — FAQs */}
+      <section className="bg-cream border-y border-border">
+        <div className="container-editorial py-16 md:py-24">
+          <Reveal>
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary block text-center mb-3">Got Questions?</span>
+          </Reveal>
+          <Reveal delay={60}>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-14">
+              Frequently Asked Questions.
+            </h2>
+          </Reveal>
+          <Reveal delay={100}>
+            <FaqAccordion />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Keep your existing Final CTA section here, unchanged, right after this */}
+      {/* PROGRAMS
       <section className="bg-cream border-y border-border">
         <div className="container-editorial py-16 md:py-24">
           <div className="flex items-end justify-between mb-9 flex-wrap gap-3">
@@ -321,7 +613,6 @@ function Home() {
         </div>
       </section>
 
-      {/* WHY DUOFIT — Venn diagram (existing interactive component, per instruction) */}
       <section className="container-editorial py-16 md:py-24">
         <div className="grid lg:grid-cols-[1fr_1.15fr_0.7fr] gap-10 lg:gap-8 items-center">
 
@@ -373,7 +664,6 @@ function Home() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
       <section className="bg-cream border-y border-border">
         <div className="container-editorial py-16 md:py-24">
           <div className="flex items-end justify-between mb-9 flex-wrap gap-3">
@@ -411,7 +701,6 @@ function Home() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
       <section className="container-editorial py-16 md:py-20">
         <Reveal>
           <div className="rounded-3xl bg-primary text-primary-foreground p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
@@ -435,7 +724,7 @@ function Home() {
             </div>
           </div>
         </Reveal>
-      </section>
+      </section> */}
 
     </SiteLayout>
   );
