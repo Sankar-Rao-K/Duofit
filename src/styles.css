@@ -61,38 +61,38 @@
 :root {
   --radius: 0.25rem;
 
-  /* Getting Unstuck — warm cream, deep forest green, antique gold */
-  --background: oklch(0.93 0.018 85);           /* warm beige cream #ebe5d3 */
-  --foreground: oklch(0.28 0.025 145);          /* deep forest ink */
-  --ink: oklch(0.24 0.03 145);
+  /* Terracotta / neutral theme */
+  --background: #FFFFFF;
+  --foreground: #0B0C0E;
+  --ink: #0B0C0E;
 
-  --cream: oklch(0.95 0.018 85);                /* lifted cream surface */
-  --sage: oklch(0.36 0.045 145);                /* deep muted forest green */
-  --sage-soft: oklch(0.78 0.04 140);
+  --cream: #F1F1F1;
+  --sage: #A43B20;
+  --sage-soft: #A43B20;
 
-  --card: oklch(0.95 0.018 85);
+  --card: #FFFFFF;
   --card-foreground: var(--foreground);
-  --popover: oklch(0.96 0.015 85);
+  --popover: #FFFFFF;
   --popover-foreground: var(--foreground);
 
-  --primary: oklch(0.36 0.045 145);             /* deep forest green */
-  --primary-foreground: oklch(0.95 0.018 85);
+  --primary: #A43B20;
+  --primary-foreground: #FFFFFF;
 
-  --secondary: oklch(0.88 0.022 85);
+  --secondary: #F1F1F1;
   --secondary-foreground: var(--foreground);
 
-  --muted: oklch(0.9 0.018 85);
-  --muted-foreground: oklch(0.45 0.025 140);
+  --muted: #FFF7F1;
+  --muted-foreground: #9D9D9D;
 
-  --accent: oklch(0.68 0.08 80);                /* antique gold #b89968 */
-  --accent-foreground: oklch(0.22 0.02 145);
+  --accent: #A43B20;
+  --accent-foreground: #FFFFFF;
 
-  --destructive: oklch(0.55 0.2 27);
-  --destructive-foreground: oklch(0.97 0 0);
+  --destructive: #A43B20;
+  --destructive-foreground: #FFFFFF;
 
-  --border: oklch(0.82 0.022 85);
-  --input: oklch(0.86 0.02 85);
-  --ring: oklch(0.68 0.08 80);
+  --border: #E8E8E8;
+  --input: #E8E8E8;
+  --ring: #A43B20;
 }
 
 @layer base {
