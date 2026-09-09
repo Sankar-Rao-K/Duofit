@@ -332,6 +332,20 @@ function FaqAccordion() {
     </div>
   );
 }
+const painPoints = [
+  "Trying to lose weight but struggling to stay consistent",
+  "Poor sleep, low energy and feeling constantly tired",
+  "Feeling confused by conflicting health and nutrition advice",
+  "Starting healthy routines and stopping after a few weeks",
+  "Busy work and family schedules leaving little time for yourself",
+  "Knowing what to do but finding it hard to follow through consistently",
+];
+
+const outcomes = [
+  "More energy throughout the day",
+  "Better routines you can actually maintain",
+  "A healthier lifestyle without feeling overwhelmed",
+];
 
 function Home() {
   const waUrl = `https://wa.me/${WHATSAPP_NUMBER.replace(/[^0-9]/g, "")}`;
@@ -412,25 +426,90 @@ function Home() {
         </div>
       </section>
 
-      {/* SECTION 2 — Does This Sound Like You */}
-      <section className="bg-cream border-y border-border">
-        <div className="container-editorial py-16 md:py-24">
+           {/* SECTION 2 — Does This Sound Like You (redesigned: problem → possibility) */}
+      <section className="bg-background">
+        <div className="container-editorial py-20 md:py-28">
+
+          {/* Heading */}
           <Reveal>
-            <h2 className="text-3xl md:text-5xl font-bold text-primary text-center italic mb-14 md:mb-16">
-              Does this sound like you?
-            </h2>
+            <div className="max-w-2xl mb-14 md:mb-20">
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">
+                A Familiar Story
+              </span>
+              <h2 className="mt-4 text-3xl md:text-5xl font-bold text-foreground leading-[1.15] tracking-tight">
+                Does this sound like you?
+              </h2>
+            </div>
           </Reveal>
-          <div className="grid sm:grid-cols-2 gap-x-16 gap-y-9 max-w-4xl mx-auto">
-            {soundLikeYou.map((item, i) => (
-              <Reveal key={item.text} delay={i * 70}>
-                <div className="flex items-center gap-4">
-                  <div className="shrink-0 w-16 h-16 rounded-lg overflow-hidden">
-                    <img src={item.img} alt={item.text} className="w-full h-full object-cover" />
-                  </div>
-                  <p className="text-sm text-foreground leading-snug">{item.text}</p>
-                </div>
+
+          <div className="grid lg:grid-cols-[55%_45%] gap-14 lg:gap-16 items-start">
+
+            {/* LEFT — You're not alone */}
+            <div>
+              <Reveal delay={60}>
+                <h3 className="text-lg md:text-xl font-bold text-foreground mb-8 md:mb-10">
+                  You're not alone.
+                </h3>
               </Reveal>
-            ))}
+
+              <div>
+                {painPoints.map((point, i) => (
+                  <Reveal key={point} delay={100 + i * 60}>
+                    <div className="group border-b border-border first:border-t">
+                      <div className="flex items-start gap-5 md:gap-7 py-6 md:py-7">
+                        <span className="text-2xl md:text-3xl font-bold text-border group-hover:text-primary transition-colors duration-300 tabular-nums shrink-0 w-10 md:w-12">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <p className="text-base md:text-lg text-foreground leading-relaxed pt-1 group-hover:translate-x-1.5 transition-transform duration-300">
+                          {point}
+                        </p>
+                      </div>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT — Imagine feeling different (single visual story) */}
+            <Reveal delay={140}>
+              <div className="relative pb-16 md:pb-0">
+                <div className="rounded-3xl overflow-hidden aspect-[4/5]">
+                  <img
+                    src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&h=1125&fit=crop&crop=center"
+                    alt="A calm, healthy everyday morning"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div className="relative md:absolute md:-bottom-12 md:left-6 md:right-6 -mt-10 md:mt-0 mx-4 md:mx-0 bg-background border border-border rounded-2xl p-7 md:p-8 shadow-[0_20px_45px_rgba(0,0,0,0.08)]">
+                  <h4 className="text-xl md:text-2xl font-bold text-foreground leading-snug">
+                    What if healthy living finally felt <span className="italic text-primary">simple</span>?
+                  </h4>
+                  <p className="mt-3 text-sm md:text-base text-muted-foreground leading-relaxed">
+                    No extreme routines. No confusing rules. Just practical
+                    habits that fit into your real life — and that you can
+                    actually stick with.
+                  </p>
+
+                  <div className="mt-5 space-y-2.5">
+                    {outcomes.map((item) => (
+                      <div key={item} className="flex items-start gap-2.5">
+                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm text-foreground">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Link
+                    to="/about"
+                    className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all"
+                  >
+                    See how it works <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
+              </div>
+            </Reveal>
+
           </div>
         </div>
       </section>
